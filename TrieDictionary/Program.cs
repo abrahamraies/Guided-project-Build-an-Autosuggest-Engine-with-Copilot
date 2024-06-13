@@ -14,15 +14,20 @@ Trie dictionary = InitializeTrie(words);
 // DeleteWord();
 // GetSpellingSuggestions();
 
+// This function initializes a Trie data structure with a given set of words.
 Trie InitializeTrie(string[] words)
 {
+    // Create a new Trie object.
     Trie trie = new Trie();
 
+    // Iterate over each word in the input array.
     foreach (string word in words)
     {
+        // Insert the current word into the Trie.
         trie.Insert(word);
     }
 
+    // Return the populated Trie.
     return trie;
 }
 
@@ -36,12 +41,12 @@ void SearchWord()
         {
             break;
         }
-        /*
+        
         if (input != null && dictionary.Search(input))
         {
             Console.WriteLine($"Found \"{input}\" in dictionary");
         }
-        */
+        
         else
         {
             Console.WriteLine($"Did not find \"{input}\" in dictionary");
@@ -66,14 +71,12 @@ void DeleteWord()
         {
             break;
         }
-        /*
         if (input != null && dictionary.Search(input))
         {
             dictionary.Delete(input);
             Console.WriteLine($"Deleted \"{input}\" from dictionary\n");
             PrintTrie(dictionary);
         }
-        */
         else
         {
             Console.WriteLine($"Did not find \"{input}\" in dictionary");
@@ -198,9 +201,19 @@ void PrintTrie(Trie trie)
 {
     Console.WriteLine("The dictionary contains the following words:");
     List<string> words = trie.GetAllWords();
+    int counter = 0;
     foreach (string word in words)
     {
         Console.Write($"{word}, ");
+        counter++;
+        if (counter == 5)
+        {
+            Console.WriteLine();
+            counter = 0;
+        }
     }
-    Console.WriteLine();
+    if (counter != 0) // This is to ensure that there is a newline at the end even if the last line contains less than 5 words
+    {
+        Console.WriteLine();
+    }
 }
